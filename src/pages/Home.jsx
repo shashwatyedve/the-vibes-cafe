@@ -1,5 +1,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import logo from "../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
+
 
 // ─── Floating Particle ────────────────────────────────────────────────────────
 function Particle({ style }) {
@@ -110,22 +113,22 @@ function LogoSection() {
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         whileHover={{ scale: 1.06 }}
       >
-        {/* Outer glow ring */}
+        {/* Outer glow ring — responsive size via min() */}
         <div
           className="absolute rounded-full"
           style={{
-            width: 240,
-            height: 240,
+            width: "min(280px, 72vw)",
+            height: "min(280px, 72vw)",
             background:
               "radial-gradient(circle, rgba(217,119,6,0.14) 0%, rgba(111,78,55,0.10) 55%, rgba(248,244,233,0) 100%)",
           }}
         />
-        {/* Logo circle */}
+        {/* Logo circle — 220–240px on mobile, 200px on desktop via min() */}
         <div
           className="relative flex items-center justify-center rounded-full"
           style={{
-            width: 200,
-            height: 200,
+            width: "min(230px, 64vw)",
+            height: "min(230px, 64vw)",
             background:
               "linear-gradient(145deg, rgba(248,244,233,0.95) 0%, rgba(248,244,233,0.75) 100%)",
             boxShadow:
@@ -134,13 +137,17 @@ function LogoSection() {
             backdropFilter: "blur(12px)",
           }}
         >
-          <span style={{ fontSize: 80 }}>☕</span>
+          <img
+            src={logo}
+            alt="Coffee"
+            className="w-80 h-80 object-contain"
+          />
         </div>
       </motion.div>
 
       {/* Café name */}
       <motion.div
-        className="mt-8 text-center"
+        className="mt-5 lg:mt-8 text-center"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.7 }}
@@ -158,25 +165,8 @@ function LogoSection() {
           The Vibes Café
         </h3>
         <p className="text-sm mt-1" style={{ color: "#6F4E37" }}>
-          Mumbai, India
+          Aurad, Karnataka, India
         </p>
-      </motion.div>
-
-      {/* Rating pill */}
-      <motion.div
-        className="mt-5 flex items-center gap-2 px-5 py-2 rounded-full"
-        style={{
-          background: "rgba(111,78,55,0.08)",
-          border: "1px solid rgba(111,78,55,0.15)",
-        }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1.1, duration: 0.5 }}
-      >
-        <span style={{ fontSize: 16 }}>⭐</span>
-        <span className="text-sm font-semibold" style={{ color: "#3E2723" }}>
-          4.9 · 2,400+ Reviews
-        </span>
       </motion.div>
     </motion.div>
   );
@@ -217,8 +207,8 @@ export default function Home() {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
   const bgY = useTransform(scrollY, [0, 500], [0, 60]);
+  const navigate = useNavigate();
 
-  // Generate stable particles (memo not needed, these are bg decorations)
   const particles = Array.from({ length: 14 }, (_, i) => ({
     size: `${8 + ((i * 7) % 20)}px`,
     left: `${(i * 13 + 5) % 100}%`,
@@ -232,7 +222,7 @@ export default function Home() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden pt-[104px] lg:pt-0"
       style={{ background: "#F8F4E9" }}
     >
       {/* ── Background: parallax glow ── */}
@@ -268,18 +258,27 @@ export default function Home() {
         <Particle key={i} style={p} />
       ))}
 
-      {/* ── 3-Column Grid ── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 py-24 grid grid-cols-1 lg:grid-cols-[40%_30%_30%] gap-10 lg:gap-6 items-center min-h-screen">
+      {/* ── Grid Layout ── */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 py-12 lg:py-24 grid grid-cols-1 lg:grid-cols-[40%_30%_30%] gap-6 lg:gap-6 items-center min-h-screen">
 
-        {/* ── LEFT: Headline + CTAs ── */}
+        {/* ── MOBILE TOP / DESKTOP RIGHT: Logo ─────────────────────────────────
+            • Mobile:   order-1 → renders first, full width, centered
+            • Desktop:  order-3 → renders in the right column               ── */}
+        <div className="order-1 lg:order-3 flex items-center justify-center">
+          <LogoSection />
+        </div>
+
+        {/* ── LEFT: Headline + CTAs ──────────────────────────────────────────
+            • Mobile:   order-2 → below logo
+            • Desktop:  order-1 → left column                               ── */}
         <motion.div
-          className="flex flex-col gap-6 order-2 lg:order-1"
+          className="flex flex-col gap-5 lg:gap-6 order-2 lg:order-1"
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, ease: "easeOut" }}
         >
           {/* Badge */}
-          <motion.div
+          {/* <motion.div
             className="inline-flex items-center gap-2 self-start px-4 py-1.5 rounded-full text-xs font-semibold uppercase"
             style={{
               background: "rgba(217,119,6,0.12)",
@@ -293,7 +292,7 @@ export default function Home() {
           >
             <span>☕</span>
             <span>Coffee · Food · Vibes</span>
-          </motion.div>
+          </motion.div> */}
 
           {/* Main heading */}
           <motion.h1
@@ -308,7 +307,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
           >
-            Where Great Coffee Meets{" "}
+            Feel the vibes{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #D97706 0%, #6F4E37 100%)",
@@ -317,7 +316,7 @@ export default function Home() {
                 backgroundClip: "text",
               }}
             >
-              Great Vibes
+              Make memories!
             </span>
           </motion.h1>
 
@@ -329,20 +328,62 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45, duration: 0.7 }}
           >
-            Freshly brewed coffee, handcrafted pizzas, juicy burgers, and unforgettable moments — all in one cozy corner of the city.
+            From freshly brewed coffee and handcrafted pizzas to juicy burgers, crispy fries,
+            refreshing mojitos, and rich creamy shakes — every bite and sip is crafted to create
+            unforgettable moments in our cozy corner of the city.
           </motion.p>
+
+          {/* CTA Buttons — moved above stats on mobile for better visual hierarchy */}
+          <motion.div
+            className="flex flex-wrap gap-4 pt-1"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          >
+            <motion.button
+                  className="px-8 py-3.5 rounded-full text-sm font-bold tracking-wide text-white"
+                  style={{
+                    background: "linear-gradient(135deg, #D97706 0%, #B45309 100%)",
+                    boxShadow: "0 4px 20px rgba(217,119,6,0.35)",
+                    border: "none",
+                  }}
+                  whileHover={{ scale: 1.04, boxShadow: "0 8px 32px rgba(217,119,6,0.50)" }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => navigate("/order-online")}
+                >
+                  Order Online
+                </motion.button>
+
+                <motion.button
+                  className="px-8 py-3.5 rounded-full text-sm font-bold tracking-wide"
+                  style={{
+                    background: "transparent",
+                    border: "1.5px solid rgba(111,78,55,0.40)",
+                    color: "#3E2723",
+                  }}
+                  whileHover={{
+                    scale: 1.04,
+                    background: "rgba(111,78,55,0.06)",
+                    borderColor: "rgba(111,78,55,0.70)",
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => navigate("/menu")}
+                >
+                  View Menu
+                </motion.button>
+          </motion.div>
 
           {/* Stats */}
           <motion.div
             className="flex items-center gap-6"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
+            transition={{ delay: 0.75, duration: 0.6 }}
           >
             {[
-              { value: "50+",  label: "Menu Items"   },
-              { value: "10K+", label: "Happy Guests"  },
-              { value: "4.9★", label: "Rating"        },
+              { value: "50+",  label: "Menu Items"  },
+              { value: "2K+",  label: "Happy Guests" },
+              { value: "4 ★",  label: "Rating"       },
             ].map((s) => (
               <div key={s.label} className="flex flex-col">
                 <span className="text-xl font-bold" style={{ color: "#3E2723" }}>
@@ -357,49 +398,12 @@ export default function Home() {
               </div>
             ))}
           </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-wrap gap-4 pt-1"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.75, duration: 0.6 }}
-          >
-            <motion.button
-              className="px-8 py-3.5 rounded-full text-sm font-bold tracking-wide text-white"
-              style={{
-                background: "linear-gradient(135deg, #D97706 0%, #B45309 100%)",
-                boxShadow: "0 4px 20px rgba(217,119,6,0.35)",
-                border: "none",
-              }}
-              whileHover={{ scale: 1.04, boxShadow: "0 8px 32px rgba(217,119,6,0.50)" }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Order Online
-            </motion.button>
-
-            <motion.button
-              className="px-8 py-3.5 rounded-full text-sm font-bold tracking-wide"
-              style={{
-                background: "transparent",
-                border: "1.5px solid rgba(111,78,55,0.40)",
-                color: "#3E2723",
-              }}
-              whileHover={{
-                scale: 1.04,
-                background: "rgba(111,78,55,0.06)",
-                borderColor: "rgba(111,78,55,0.70)",
-              }}
-              whileTap={{ scale: 0.97 }}
-            >
-              View Menu
-            </motion.button>
-          </motion.div>
         </motion.div>
 
-        {/* ── CENTER: Floating Food Showcase ── */}
+        {/* ── CENTER: Floating Food Showcase ────────────────────────────────
+            Hidden on mobile (<lg), visible on desktop only.              ── */}
         <motion.div
-          className="flex flex-col items-center justify-center gap-8 order-1 lg:order-2 py-8"
+          className="hidden lg:flex flex-col items-center justify-center gap-8 order-2 py-8"
           initial={{ opacity: 0, scale: 0.88 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.25, ease: "easeOut" }}
@@ -409,23 +413,7 @@ export default function Home() {
           <FoodItem emoji="🍔" label="Burger" delay={1.6} rotateFrom={-2} rotateTo={4}  />
         </motion.div>
 
-        {/* ── RIGHT: Logo ── */}
-        <div className="order-3 hidden sm:flex items-center justify-center">
-          <LogoSection />
-        </div>
       </div>
-
-      {/* ── Scroll Indicator ── */}
-      <ScrollIndicator />
-
-      {/* ── Bottom fade ── */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(248,244,233,0) 0%, rgba(248,244,233,0.7) 100%)",
-        }}
-      />
 
       {/* ── Reduced motion accessibility ── */}
       <style>{`

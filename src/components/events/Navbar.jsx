@@ -5,7 +5,7 @@ import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
 // Co-located nav data — no more fragile toLowerCase() + ternary
 const NAV_LINKS = [
   { label: "Home",    path: "/" },
-  { label: "About",   path: "/about" },
+  { label: "Reservation",   path: "/reservation" },
   { label: "Menu",    path: "/menu" },
   { label: "Gallery", path: "/gallery" },
   { label: "Contact", path: "/contact" },

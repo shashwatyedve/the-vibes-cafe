@@ -1,5 +1,7 @@
 import React from "react";
 import { FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa";
+import { motion, useScroll, useTransform } from "framer-motion";
+
 
 const SOCIAL_LINKS = [
   {
@@ -9,12 +11,12 @@ const SOCIAL_LINKS = [
   },
   {
     icon: FaWhatsapp,
-    href: "https://wa.me/91XXXXXXXXXX", // 🔧 Replace with real WhatsApp number
+    href: "https://wa.me/917899909622", // 🔧 Replace with real WhatsApp number
     label: "WhatsApp",
   },
   {
     icon: FaEnvelope,
-    href: "mailto:thevibescafe@gmail.com",
+    href: "mailto:basubiradar511@gmail.com",
     label: "Email us",
   },
 ];
@@ -28,11 +30,15 @@ const TopBar = () => {
         <p className="text-sm text-[#f8ddca] font-medium tracking-wide">
           Coffee • Food • Vibes
         </p>
+        
 
         {/* Right */}
         <div className="flex items-center gap-6">
           <p className="text-sm text-[#f8ddca] font-medium hidden md:block">
-            Open Daily &nbsp;|&nbsp; 9:00 AM – 10:00 PM
+            <span>
+              Mon – Fri | 10 AM – 10 PM &nbsp;&nbsp;•&nbsp;&nbsp;
+              Sat – Sun | 9 AM – 11 PM
+            </span>
           </p>
 
           <div className="flex gap-3" role="list" aria-label="Social media links">
