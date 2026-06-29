@@ -7,6 +7,7 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import OrderOnline from "./pages/OrderOnline";
 import TopBar from "./components/events/Topbar";
+import Footer from "./components/events/Footer"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/order-online" element={<OrderOnline />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

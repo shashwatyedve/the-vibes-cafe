@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import logo from "../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/events/Footer";
 
 
 // ─── Floating Particle ────────────────────────────────────────────────────────
@@ -421,6 +422,7 @@ export default function Home() {
           * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
       `}</style>
+      
     </section>
   );
 }

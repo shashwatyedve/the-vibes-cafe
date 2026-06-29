@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import "./Gallery.css";
+// import Footer from "../components/events/Footer";
+
 
 import img1  from "../assets/images/img1.jpeg";
 import img2  from "../assets/images/img2.jpeg";
@@ -94,45 +96,6 @@ function GalleryCard({ item, index }) {
   );
 }
 
-function CTASection() {
-  return (
-    <section className="gallery-cta">
-      <div className="gallery-cta-pattern" aria-hidden="true" />
-      <motion.div
-        className="gallery-cta-content"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.13 } } }}
-      >
-        <motion.p className="cta-eyebrow" variants={fadeUp}>✦ Join Us ✦</motion.p>
-        <motion.h2 className="cta-heading" variants={fadeUp}>
-          Create Your Next Memory With Us
-        </motion.h2>
-        <motion.p className="cta-sub" variants={fadeUp}>
-          Book a table and let us take care of the rest — good food, great vibes.
-        </motion.p>
-        <motion.a
-          href="/reservation"
-          className="cta-btn"
-          variants={fadeUp}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-        >
-          Reserve A Table
-        </motion.a>
-      </motion.div>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="gallery-footer">
-      <p>© {new Date().getFullYear()} The Vibes Cafe · Aurad, Karnataka, India</p>
-    </footer>
-  );
-}
 
 // ─── MAIN PAGE ───────────────────────────────────────────────────────────────
 
@@ -150,9 +113,7 @@ export default function Gallery() {
           </AnimatePresence>
         </motion.div>
       </section>
-
-      {/* <CTASection /> */}
-      <Footer />
+     
     </div>
   );
 }
