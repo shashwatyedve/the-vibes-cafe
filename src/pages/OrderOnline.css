@@ -1,0 +1,232 @@
+/* ===========================
+   ORDER ONLINE PAGE
+=========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.order-page {
+  min-height: 100vh;
+  background: #faf8f5;
+  padding-top: 90px;
+}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+
+.order-hero {
+  text-align: center;
+  padding: 80px 20px;
+  color: white;
+  background: linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+              url("/images/order-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.order-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.order-hero p {
+  font-size: 1.1rem;
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.7;
+}
+
+/* ===========================
+   CATEGORY BUTTONS
+=========================== */
+
+.category-section {
+  width: 90%;
+  margin: 50px auto 20px;
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.category-buttons button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 5px 12px rgba(0,0,0,.1);
+}
+
+.category-buttons button:hover {
+  background: #d35400;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.active-category {
+  background: #d35400 !important;
+  color: white !important;
+}
+
+/* ===========================
+   FOOD GRID
+=========================== */
+
+.food-grid {
+  width: 90%;
+  max-width: 1400px;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* ===========================
+   FOOD CARD
+=========================== */
+
+.food-card {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 25px rgba(0,0,0,.12);
+  transition: .3s;
+}
+
+.food-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 35px rgba(0,0,0,.18);
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+.food-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* ===========================
+   FOOD INFO
+=========================== */
+
+.food-info {
+  padding: 20px;
+}
+
+.food-info h3 {
+  font-size: 1.4rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.food-info p {
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.food-info h4 {
+  color: #d35400;
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.food-info button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #d35400;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.food-info button:hover {
+  background: #b84300;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 992px) {
+
+  .order-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .food-card img {
+    height: 200px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .order-page {
+    padding-top: 80px;
+  }
+
+  .order-hero {
+    padding: 60px 20px;
+  }
+
+  .order-hero h1 {
+    font-size: 2rem;
+  }
+
+  .order-hero p {
+    font-size: 1rem;
+  }
+
+  .category-buttons button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .order-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .food-card img {
+    height: 180px;
+  }
+
+  .food-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .food-info h4 {
+    font-size: 1.1rem;
+  }
+
+  .food-info button {
+    font-size: 15px;
+  }
+
+}
